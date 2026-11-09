@@ -1,462 +1,122 @@
 <!doctype html>
 <html lang="en">
-
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Al-Rashed</title>
-    <style>
-        :root {
-            --bg: #ffffff;
-            --text: #111827;
-            --muted: #6b7280;
-            --line: #e5e7eb;
-            --gold: #b89a5b;
-            --nav: #0f172a;
-            /* Logo background color (matched) */
-            --logo-bg: #D9D6CF;
-            --logo-bg-line: #cfcac2;
-            --shadow: 0 12px 34px rgba(15, 23, 42, .10);
-            --radius: 18px;
-            --max: 1200px;
-        }
-
-        * {
-            box-sizing: border-box;
-        }
-
-        body {
-            margin: 0;
-            font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Liberation Sans", sans-serif;
-            color: var(--text);
-            background: var(--bg);
-            line-height: 1.55;
-        }
-
-        a {
-            color: inherit;
-            text-decoration: none;
-        }
-
-        img {
-            max-width: 100%;
-            display: block;
-        }
-
-        .wrap {
-            max-width: var(--max);
-            margin: 0 auto;
-            padding: 0 18px;
-        }
-
-        /* HEADER (logo + motto only) */
-        header {
-            position: sticky;
-            top: 0;
-            z-index: 50;
-            background: #f2efec;
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--line);
-        }
-
-        .headerRow {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 14px 0;
-            gap: 16px;
-        }
-
-        .brand {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            min-width: 240px;
-        }
-
-        .siteLogo {
-            height: 52px;
-            width: auto;
-            object-fit: contain;
-            flex: 0 0 auto;
-        }
-
-        .brandText {
-            display: flex;
-            flex-direction: column;
-            line-height: 1.15;
-        }
-
-        .brandText strong {
-            font-size: 14px;
-            letter-spacing: .02em;
-        }
-
-        .brandText span {
-            font-size: 12px;
-            color: var(--muted);
-        }
-
-        .motto {
-            font-weight: 800;
-            letter-spacing: -.01em;
-            color: var(--nav);
-            text-align: right;
-            font-size: 14px;
-            line-height: 1.2;
-        }
-
-        .motto .accent {
-            color: var(--gold);
-        }
-
-        /* HERO (full width) */
-        .hero {
-            min-height: 420px;
-            display: flex;
-            align-items: center;
-            position: relative;
-            overflow: hidden;
-            background: linear-gradient(135deg, rgba(15, 23, 42, .90), rgba(15, 23, 42, .55)), url("https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=2200&q=70");
-            background-size: cover;
-            background-position: center;
-        }
-
-        .hero::after {
-            content: "";
-            position: absolute;
-            inset: -1px;
-            background: radial-gradient(900px 420px at 15% 20%, rgba(184, 154, 91, .22), transparent 60%), radial-gradient(700px 460px at 85% 0%, rgba(255, 255, 255, .10), transparent 55%);
-            pointer-events: none;
-        }
-
-        .heroInner {
-            position: relative;
-            width: 100%;
-            padding: 62px 0;
-        }
-
-        .heroKicker {
-            color: rgba(255, 255, 255, .78);
-            font-weight: 700;
-            letter-spacing: .10em;
-            text-transform: uppercase;
-            font-size: 12px;
-        }
-
-        .hero h1 {
-            margin: 12px 0 12px;
-            font-size: 46px;
-            line-height: 1.08;
-            letter-spacing: -.02em;
-            color: #fff;
-            max-width: 900px;
-        }
-
-        .hero p {
-            margin: 0;
-            color: rgba(255, 255, 255, .80);
-            max-width: 760px;
-            font-size: 16px;
-            line-height: 1.7;
-        }
-
-        .heroActions {
-            margin-top: 18px;
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 11px 16px;
-            border-radius: 12px;
-            font-weight: 700;
-            font-size: 14px;
-            border: 1px solid rgba(255, 255, 255, .22);
-            background: rgba(255, 255, 255, .10);
-            color: #fff;
-            transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
-        }
-
-        .btn:hover {
-            transform: translateY(-1px);
-            box-shadow: var(--shadow);
-            background: rgba(255, 255, 255, .14);
-        }
-
-        .btn.primary {
-            background: var(--gold);
-            color: #111827;
-            border-color: transparent;
-        }
-
-        .btn.ghost {
-            background: transparent;
-            border-color: rgba(255, 255, 255, .28);
-        }
-
-        /* FILTERS */
-        .filtersSection {
-            padding: 28px 0 10px;
-            border-bottom: 1px solid var(--line);
-            background: #fff;
-        }
-
-        .filtersCard {
-            background: #fff;
-            border: 1px solid var(--line);
-            border-radius: var(--radius);
-            padding: 18px;
-            box-shadow: 0 10px 25px rgba(15, 23, 42, .06);
-        }
-
-        .filters {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1.4fr auto;
-            gap: 12px;
-            align-items: end;
-        }
-
-        .field label {
-            display: block;
-            font-size: 12px;
-            color: var(--muted);
-            margin-bottom: 6px;
-        }
-
-        .filters select,
-        .filters input {
-            width: 100%;
-            height: 46px;
-            border-radius: 12px;
-            border: 1px solid var(--line);
-            padding: 0 12px;
-            background: #fff;
-            font-size: 14px;
-            outline: none;
-        }
-
-        .filters select:focus,
-        .filters input:focus {
-            border-color: rgba(184, 154, 91, .75);
-            box-shadow: 0 0 0 4px rgba(184, 154, 91, .18);
-        }
-
-        .filtersBtn {
-            height: 46px;
-            padding: 0 16px;
-            border-radius: 12px;
-            white-space: nowrap;
-            font-weight: 800;
-            background: var(--nav);
-            color: #fff;
-            border: 0;
-            cursor: pointer;
-            transition: transform .15s ease, box-shadow .15s ease, opacity .15s ease;
-        }
-
-        .filtersBtn:hover {
-            transform: translateY(-1px);
-            box-shadow: var(--shadow);
-            opacity: .98;
-        }
-
-        .hintRow {
-            margin-top: 10px;
-            color: var(--muted);
-            font-size: 13px;
-            display: flex;
-            justify-content: space-between;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
-
-        /* FOOTER (logo background color) */
-        footer {
-            margin-top: 26px;
-            border-top: 1px solid var(--logo-bg-line);
-            padding: 34px 0;
-            background: #4b4b4b;
-            color: #e1e1e1;
-        }
-
-        .footerGrid {
-            display: grid;
-            grid-template-columns: 1.2fr .8fr 1fr;
-            gap: 22px;
-            align-items: start;
-        }
-
-        footer a {
-            color: #e1e1e1;
-            opacity: .9;
-        }
-
-        footer a:hover {
-            opacity: 1;
-        }
-
-        .footTitle {
-            font-weight: 800;
-            margin-bottom: 10px;
-        }
-
-        .footSmall {
-            color: #e1e1e1;
-            font-size: 13px;
-            line-height: 1.6;
-        }
-
-        .footList a {
-            display: block;
-            padding: 6px 0;
-            font-size: 13px;
-        }
-
-        .copy {
-            margin-top: 20px;
-            padding-top: 16px;
-            border-top: 1px solid var(--logo-bg-line);
-            font-size: 12px;
-            color: #e1e1e1;
-            display: flex;
-            justify-content: space-between;
-            gap: 14px;
-            flex-wrap: wrap;
-        }
-
-        /* RESPONSIVE */
-        @media (max-width: 1024px) {
-            .motto {
-                font-size: 13px;
-            }
-
-            .hero h1 {
-                font-size: 40px;
-            }
-
-            .filters {
-                grid-template-columns: 1fr 1fr;
-            }
-
-            .filtersBtn {
-                grid-column: 1 / -1;
-                width: 100%;
-            }
-
-            .footerGrid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 520px) {
-            .headerRow {
-                align-items: flex-start;
-                flex-direction: column;
-            }
-
-            .motto {
-                text-align: left;
-            }
-
-            .heroInner {
-                padding: 48px 0;
-            }
-
-            .hero h1 {
-                font-size: 32px;
-            }
-
-            .filters {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ARC Team Finder</title>
+<style>
+:root{--navy:#07152e;--panel:#102548;--blue:#3e83ff;--gold:#ffd166;--mint:#63e6b2;--white:#f5f8ff;--muted:#aebfda;--line:#ffffff24;--red:#ff7588}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 50% -15%,#20488b 0,transparent 55%),var(--navy);color:var(--white);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;min-height:100vh}
+button,input{font:inherit}button{cursor:pointer;color:inherit}.wrap{max-width:1450px;margin:auto;padding:18px clamp(14px,3vw,38px);min-height:100vh;display:flex;flex-direction:column}
+header{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);padding-bottom:15px;gap:12px}.brand{display:flex;align-items:center;gap:12px}.logo{width:46px;height:46px;border-radius:14px;background:var(--gold);color:#17233a;font-weight:1000;display:grid;place-items:center}.brand h1{margin:0;font-size:clamp(17px,2vw,24px);letter-spacing:.04em}.brand p{margin:4px 0 0;color:var(--muted);font-size:11px;letter-spacing:.13em;text-transform:uppercase}.pill{border:1px solid var(--line);border-radius:99px;padding:8px 12px;font-size:11px;font-weight:850;letter-spacing:.08em;color:#d5e2f8}
+main{flex:1;padding-top:18px}.panel{background:#0c1d3cde;border:1px solid var(--line);border-radius:22px;padding:clamp(16px,2.6vw,30px);box-shadow:0 18px 60px #0003}.layout{display:grid;grid-template-columns:minmax(0,1fr) 310px;gap:16px}.side{display:flex;flex-direction:column;gap:14px}
+h2{margin:0 0 8px;font-size:clamp(23px,3vw,38px);letter-spacing:-.035em}h3{margin:0 0 12px;font-size:14px;text-transform:uppercase;letter-spacing:.12em}.sub{margin:0 0 20px;color:var(--muted);line-height:1.5}.gold{color:var(--gold)}.muted{color:var(--muted)}
+.btn{border:0;border-radius:13px;padding:13px 18px;font-weight:950;background:linear-gradient(135deg,#ffe69b,var(--gold));color:#17233a}.btn:disabled{opacity:.38;cursor:not-allowed}.btn.alt{background:#ffffff12;color:var(--white);border:1px solid var(--line)}.btn:hover{filter:brightness(1.07);transform:translateY(-1px)}
+input{width:100%;border:1px solid #ffffff28;background:#07162e;color:var(--white);border-radius:11px;padding:11px 12px;outline:none}input:focus{border-color:var(--gold)}label{display:block;font-weight:800;font-size:12px;margin:0 0 6px}.field{margin:0 0 12px}.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.profile-row{display:grid;grid-template-columns:1fr 1fr 1fr 1.4fr 1.3fr 36px;gap:7px;align-items:center;margin:8px 0}.profile-row input{font-size:12px;padding:9px}.remove{border:1px solid var(--line);background:#ffffff0b;border-radius:9px;height:36px}
+.qrbox{background:white;border-radius:14px;padding:12px;display:grid;place-items:center;min-height:190px}.qrbox canvas,.qrbox img{max-width:100%}
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin:15px 0}.kpi{padding:12px;border-radius:13px;background:#ffffff09;border:1px solid var(--line)}.kpi b{display:block;font-size:24px;color:var(--gold)}.kpi span{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+.timer{font-size:clamp(30px,5vw,60px);font-variant-numeric:tabular-nums;font-weight:1000;color:var(--gold);letter-spacing:.03em}.timer.urgent{color:var(--red);animation:pulse .6s infinite alternate}@keyframes pulse{to{transform:scale(1.04)}}
+.status{display:inline-flex;align-items:center;gap:7px;color:var(--mint);font-size:11px;font-weight:900;letter-spacing:.1em;text-transform:uppercase}.status:before{content:"";width:8px;height:8px;border-radius:50%;background:currentColor}
+.players{max-height:360px;overflow:auto;display:flex;flex-direction:column;gap:7px}.player{display:flex;align-items:center;justify-content:space-between;gap:9px;background:#ffffff08;padding:10px;border-radius:11px;font-size:12px}.player small{color:var(--muted)}.type-tag{font-size:9px;font-weight:900;letter-spacing:.08em;border:1px solid var(--line);border-radius:99px;padding:5px 7px}
+.card{max-width:650px;margin:20px auto;background:linear-gradient(145deg,#fff,#eaf0fa);color:#16213a;border-radius:24px;padding:24px;box-shadow:0 22px 65px #0005;min-height:330px;display:flex;flex-direction:column;position:relative;overflow:hidden}.card:after{content:"";position:absolute;width:210px;height:210px;border:1px solid #18223b12;border-radius:50%;right:-95px;top:-90px}.card-head{display:flex;justify-content:space-between;align-items:center;gap:10px;border-bottom:1px solid #18223b20;padding-bottom:12px}.card-kind{font-size:10px;font-weight:1000;letter-spacing:.14em;text-transform:uppercase;color:#2859a8}.card-fragment{font-size:20px;font-weight:1000;letter-spacing:.12em;background:#142b50;color:white;border-radius:10px;padding:8px 11px}.card-content{flex:1;display:grid;place-items:center;text-align:center;padding:22px 8px;position:relative;z-index:1}.card-content h2{font-size:clamp(28px,5vw,47px);color:#14213b}.card-content p{font-size:17px;line-height:1.45;color:#30415f;margin:6px auto;max-width:520px}.photo{width:145px;height:145px;object-fit:cover;border-radius:50%;border:6px solid #fff;box-shadow:0 8px 25px #14213b2b;background:#dbe4f3}
+.code-entry{max-width:570px;margin:18px auto}.code-entry input{text-align:center;font-size:27px;letter-spacing:.2em;font-weight:950;padding:14px}.hint{font-size:12px;color:var(--muted);line-height:1.5}.team-banner{text-align:center;border-radius:18px;background:linear-gradient(110deg,#164c48,#103650);padding:20px;margin:16px 0}.team-banner h2{color:var(--mint)}.team-roster{display:flex;justify-content:center;flex-wrap:wrap;gap:8px}.team-roster span{background:#ffffff12;padding:8px 12px;border-radius:99px;font-size:12px}
+.grid-two{display:grid;grid-template-columns:1fr 1fr;gap:14px}.event-list{display:grid;grid-template-columns:1fr 1fr;gap:8px}.event-team{background:#ffffff08;border:1px solid var(--line);padding:10px;border-radius:11px;font-size:12px}.event-team b{display:block;color:var(--gold);margin-bottom:4px}.msg{min-height:22px;font-weight:800;font-size:13px;color:var(--mint);margin:10px 0}.error{color:var(--red)}.hidden{display:none!important}.join-center{max-width:680px;margin:5vh auto;text-align:center}.join-center h2{font-size:clamp(32px,6vw,65px)}.join-card{margin:20px auto;padding:18px;background:#ffffff09;border:1px solid var(--line);border-radius:18px;text-align:left}.eyebrow{color:var(--gold);font-size:11px;font-weight:950;letter-spacing:.14em;text-transform:uppercase}
+footer{text-align:center;color:#8194b6;font-size:10px;padding-top:13px}
+@media(max-width:900px){.layout{grid-template-columns:1fr}.grid-two{grid-template-columns:1fr}.side{display:grid;grid-template-columns:1fr 1fr}.side .panel:last-child{grid-column:1/-1}}
+@media(max-width:620px){.profile-row{grid-template-columns:1fr 1fr}.profile-row .remove{grid-column:2}.row,.event-list{grid-template-columns:1fr}.side{display:flex}.kpis{grid-template-columns:1fr 1fr 1fr}}
+</style>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 </head>
-
-<body> <!-- HEADER -->
-    <header>
-        <div class="wrap">
-            <div class="headerRow"> <a class="brand" href="#" aria-label="Al-Rashed"> <img
-                        src="https://gnz.0dc.myftpupload.com/wp-content/uploads/elementor/thumbs/Final-Logo-rhs7hhkx22p0z8s3v7lfdfjofi915bhdq8llzl7tv8.png"
-                        alt="Al-Rashed Group Holding Co., KSCC Logo" class="siteLogo" />
-                   
-                </a>
-                <div class="motto" aria-label="Motto"> Building Legacy, <span class="accent">Driving Growth</span>,
-                    Shaping the Future. </div>
-            </div>
-        </div>
-    </header> <!-- FULL WIDTH HERO -->
-    <section class="hero" aria-label="Hero">
-        <div class="wrap heroInner">
-            <div class="heroKicker">Recruitment Portal</div>
-            <h1>Find Your Next Opportunity with Al-Rashed</h1>
-            <p> Explore current openings across our divisions and locations. Use the filters below to refine by branch,
-                job family, and keywords. </p>
-           
-        </div>
-    </section> <!-- FILTERS -->
-    <section class="filtersSection" aria-label="Job filters">
-        <div class="wrap">
-            <div class="filtersCard">
-                <div class="filters" role="search" aria-label="Search jobs">
-                    <div class="field"> <label for="branch">Branch</label> <select id="branch" name="branch">
-                            <option value="">All Branches</option>
-                            <option value="kuwait-ardiya">Kuwait – Ardiya</option>
-                            <option value="kuwait-shuwaikh">Kuwait – Shuwaikh</option>
-                            <option value="kuwait-ahmadi">Kuwait – Ahmadi</option>
-                            <option value="ksa">KSA</option>
-                        </select> </div>
-                    <div class="field"> <label for="family">Job Family</label> <select id="family" name="family">
-                            <option value="">All Job Families</option>
-                            <option value="oil-gas">Oil &amp; Gas</option>
-                            <option value="power-infra">Power &amp; Infrastructure</option>
-                            <option value="logistics">Shipping &amp; Logistics</option>
-                            <option value="manufacturing">Production &amp; Manufacturing</option>
-                            <option value="building-materials">Building Materials</option>
-                            <option value="corporate">Corporate</option>
-                        </select> </div>
-                    <div class="field"> <label for="q">Search</label> <input id="q" name="q" type="search"
-                            placeholder="Search by job title, keyword, or code..." /> </div> <button class="filtersBtn"
-                        type="button" id="searchBtn">Search</button>
-                </div>
-                <div class="hintRow">
-                    <div>Tip: Use keywords like “Engineer”, “Supervisor”, “Finance”, “Procurement”.</div>
-                    <div id="resultsHint" aria-live="polite"></div>
-                </div>
-            </div>
-        </div>
-    </section> <!-- FOOTER -->
-    <footer>
-        <div class="wrap">
-            <div class="footerGrid">
-                <div>
-                    <div class="footTitle">Al-Rashed Group Holding Co., KSCC</div>
-                    <div class="footSmall"> Building 225/227, Ardiya Industrial Area, Block 2, Ardiya, Kuwait<br /> P.O.
-                        Box No. 242 Safat 13003 Kuwait </div>
-                </div>
-               
-                <div>
-                    <div class="footTitle">Get In Touch</div>
-                    <div class="footSmall">
-                        <div><a href="mailto:careers@al-rashed.com">careers@al-rashed.com</a></div>
-                        <div>+ (965) 1825522</div>
-                        <div>+ (965) 243 76 780 / 714</div>
-                    </div>
-                </div>
-            </div>
-            <div class="copy">
-                <div>Al Rashed 2026© All Rights Reserved.</div>
-                <div style="display:flex; gap:14px; flex-wrap:wrap;"> <a href="https://www.al-rashedholdings.com/terms-and-conditions">Terms &amp; Conditions</a> <a
-                        href="https://www.al-rashedholdings.com/privacy-policy">Privacy Policy</a> </div>
-            </div>
-        </div>
-    </footer>
-    <script> // Demo search behavior (replace with real portal redirect / API) const btn = document.getElementById('searchBtn'); const hint = document.getElementById('resultsHint'); btn.addEventListener('click', () => { const branch = document.getElementById('branch').value; const family = document.getElementById('family').value; const q = document.getElementById('q').value.trim(); const params = new URLSearchParams(); if (branch) params.set('branch', branch); if (family) params.set('family', family); if (q) params.set('q', q); // Replace with your recruitment portal URL: // window.location.href = "YOUR_PORTAL_URL/jobs?" + params.toString(); hint.textContent = params.toString() ? ("Filters applied: " + params.toString()) : "No filters selected — showing all roles."; }); </script>
-</body>
-
-</html>
+<body><div class="wrap">
+<header><div class="brand"><div class="logo">ARC</div><div><h1>DISCIPLINE CONNECTION</h1><p>Find your three-part team</p></div></div><div class="pill" id="modePill">EVENT GAME</div></header>
+<main id="app"><div class="panel">Loading game…</div></main>
+<footer>ARC event game · 3 people · 3 clue cards · one 9-digit team code</footer></div>
+<script>
+const FIREBASE_CONFIG={apiKey:"PASTE_FIREBASE_API_KEY",authDomain:"YOUR_PROJECT.firebaseapp.com",databaseURL:"https://YOUR_PROJECT-default-rtdb.firebaseio.com",projectId:"YOUR_PROJECT",appId:"PASTE_FIREBASE_APP_ID"};
+const params=new URLSearchParams(location.search),IS_HOST=params.get("host")==="1",EVENT_ID=(params.get("event")||"arc-event").replace(/[^a-zA-Z0-9_-]/g,"").slice(0,40),ROOT="arcEvents/"+EVENT_ID,TYPES=["name","picture","role"];
+let db=null,auth=null,uid=null,timerHandle=null,profileRows=0;
+function esc(v){return String(v||"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function readyConfig(){return FIREBASE_CONFIG.apiKey.indexOf("PASTE_")!==0&&FIREBASE_CONFIG.projectId!=="YOUR_PROJECT"&&FIREBASE_CONFIG.databaseURL.indexOf("YOUR_PROJECT")<0}
+function showError(s){document.getElementById("app").innerHTML='<div class="panel"><h2>Setup needed</h2><p class="sub">'+esc(s)+'</p><p class="hint">Open README.md in the project package for Firebase setup. Add your Firebase web settings near the top of index.html.</p></div>'}
+function fmt(ms){let s=Math.max(0,Math.ceil(ms/1000));return String(Math.floor(s/60)).padStart(2,"0")+":"+String(s%60).padStart(2,"0")}
+function startClock(start){clearInterval(timerHandle);const tick=()=>{const n=document.getElementById("clock"),left=Number(start)+600000-Date.now();if(n){n.textContent=fmt(left);n.classList.toggle("urgent",left<60000);if(left<=0)clearInterval(timerHandle)}};tick();timerHandle=setInterval(tick,1000)}
+function eventRef(){return db.ref(ROOT)}
+function signIn(){firebase.initializeApp(FIREBASE_CONFIG);auth=firebase.auth();db=firebase.database();return auth.signInAnonymously().then(c=>{uid=c.user.uid})}
+function random3(){return String(Math.floor(Math.random()*900)+100)}
+function shuffle(a){for(let i=a.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function addProfileRow(p){profileRows++;const r=document.createElement("div");r.className="profile-row";r.innerHTML='<input class="pname" placeholder="Person name" value="'+esc(p.name)+'"><input class="pdiscipline" placeholder="Discipline" value="'+esc(p.discipline)+'"><input class="prole" placeholder="Role / title" value="'+esc(p.role)+'"><input class="presponsibility" placeholder="Responsibility" value="'+esc(p.responsibility)+'"><input class="pphoto" placeholder="Photo URL" value="'+esc(p.photoUrl)+'"><button class="remove">×</button>';r.querySelector(".remove").onclick=()=>r.remove();document.getElementById("profileRows").appendChild(r)}
+function profileForm(data){
+ const a=document.getElementById("app");a.innerHTML='<div class="layout"><section class="panel"><div class="eyebrow">HOST SETUP</div><h2>Prepare the card deck</h2><p class="sub">Add approved ARC people and their responsibilities. Each trio gets one name card, one picture card, and one role card. Capacity defaults to 102 people.</p><div class="field"><label>Event code</label><input id="eventInput" value="'+esc(EVENT_ID)+'"></div><div class="field"><label>Number of 3-person teams</label><input id="teamCount" type="number" min="1" max="100" value="34"></div><div style="display:flex;justify-content:space-between;align-items:center"><h3>Key people profiles</h3><button class="btn alt" id="addProfile">+ Add person</button></div><div id="profileRows"></div><div class="msg" id="setupMsg"></div><button class="btn" id="prepare">CREATE LOBBY & QR CODE</button></section><aside class="side"><div class="panel"><h3>Code mechanics</h3><p class="hint">Attendees share their three fragments and enter the same 9 digits in this order: NAME → PICTURE → ROLE. The team forms when all three submit correctly.</p></div><div class="panel"><h3>Shared lobby</h3><p class="hint">GitHub Pages hosts the screen. Firebase synchronizes names, assigned cards, formed teams, and the 10-minute countdown across phones.</p></div></aside></div>';
+ const rows=document.getElementById("profileRows");(data&&data.profiles?data.profiles:[]).forEach(p=>addProfileRow(p));
+ if(!rows.children.length){addProfileRow({name:"Sample Person 1",discipline:"Sample discipline",role:"Sample role",responsibility:"Replace with approved responsibility"});addProfileRow({name:"Sample Person 2",discipline:"Sample discipline",role:"Sample role",responsibility:"Replace with approved responsibility"});addProfileRow({name:"Sample Person 3",discipline:"Sample discipline",role:"Sample role",responsibility:"Replace with approved responsibility"})}
+ document.getElementById("addProfile").onclick=()=>addProfileRow({});
+ document.getElementById("prepare").onclick=prepareEvent;
+}
+function collectProfiles(){return Array.from(document.querySelectorAll(".profile-row")).map(r=>({name:r.querySelector(".pname").value.trim(),discipline:r.querySelector(".pdiscipline").value.trim(),role:r.querySelector(".prole").value.trim(),responsibility:r.querySelector(".presponsibility").value.trim(),photoUrl:r.querySelector(".pphoto").value.trim()})).filter(p=>p.name&&p.discipline&&p.role)}
+async function prepareEvent(){
+ const msg=document.getElementById("setupMsg"),profiles=collectProfiles(),count=Math.max(1,Math.min(100,Number(document.getElementById("teamCount").value)||34)),code=document.getElementById("eventInput").value.trim().replace(/[^a-zA-Z0-9_-]/g,"");
+ if(!profiles.length){msg.className="msg error";msg.textContent="Add at least one complete profile.";return}if(!code){msg.className="msg error";msg.textContent="Enter an event code.";return}
+ msg.textContent="Creating shuffled cards…";
+ const groups={},byGroup={};
+ for(let i=0;i<count;i++){const pid="p"+(i%profiles.length+1),p=profiles[i%profiles.length],gid="g"+String(i+1).padStart(2,"0"),parts={name:random3(),picture:random3(),role:random3()};groups[gid]={profileId:pid,teamName:"Team "+p.name+(Math.floor(i/profiles.length)?(" "+String(Math.floor(i/profiles.length)+1).padStart(2,"0")):""),code:parts.name+parts.picture+parts.role};byGroup[gid]=shuffle(TYPES.map(t=>({groupId:gid,type:t,fragment:parts[t]})))}
+ const deck=[];shuffle(Object.keys(byGroup)).forEach(g=>byGroup[g].forEach(c=>deck.push(c)));
+ const payload={status:"lobby",createdAt:Date.now(),startedAt:null,profiles:profiles,groups:groups,deck:deck,nextCardIndex:0,players:{}};
+ try{await db.ref("arcEvents/"+code).set(payload);location.href=location.pathname+"?host=1&event="+encodeURIComponent(code)}catch(e){msg.className="msg error";msg.textContent="Could not create lobby: "+e.message}
+}
+function groupStatus(d,gid){const members=Object.entries(d.players||{}).filter(x=>x[1].groupId===gid),code=d.groups[gid].code,correct=members.filter(x=>String(x[1].submittedCode||"")===code);return {members:members,correct:correct,formed:members.length===3&&correct.length===3}}
+function allFormed(d){return Object.keys(d.groups||{}).map(id=>({id:id,g:d.groups[id],s:groupStatus(d,id)})).filter(x=>x.s.formed)}
+function hostPage(d){
+ const players=Object.values(d.players||{}),formed=allFormed(d),join=location.origin+location.pathname+"?event="+encodeURIComponent(EVENT_ID),live=d.startedAt&&Date.now()<Number(d.startedAt)+600000;
+ document.getElementById("app").innerHTML='<div class="layout"><section class="panel"><div class="status">'+(live?"GAME LIVE":d.startedAt?"TIME UP":"LOBBY OPEN")+'</div><div class="timer" id="clock">'+(d.startedAt?fmt(Number(d.startedAt)+600000-Date.now()):"10:00")+'</div><h2>ARC team finder</h2><p class="sub">'+d.deck.length+' cards · '+Object.keys(d.groups).length+' trios · Share the QR, then start the shared round.</p><div class="grid-two"><div><h3>Scan to join</h3><div class="qrbox" id="qr"></div><p class="hint" style="word-break:break-all">'+esc(join)+'</p></div><div><h3>Live event status</h3><div class="kpis"><div class="kpi"><b>'+players.length+'</b><span>Joined</span></div><div class="kpi"><b>'+formed.length+'</b><span>Teams formed</span></div><div class="kpi"><b>'+Math.max(0,d.deck.length-players.length)+'</b><span>Cards left</span></div></div><p class="hint">All phones use the same start time. Registration closes when the host starts.</p><button class="btn" id="startGame" '+(d.startedAt?"disabled":"")+'>'+(d.startedAt?"GAME STARTED":"START 10-MINUTE GAME")+'</button></div></div><div class="msg" id="hostMsg"></div></section><aside class="side"><div class="panel"><h3>Attendees</h3><div class="players" id="players"></div></div><div class="panel"><h3>Teams formed</h3><div class="event-list" id="formed"></div></div><button class="btn alt" id="editProfiles" '+(d.startedAt?"disabled":"")+'>EDIT / REBUILD DECK</button></aside></div>';
+ if(window.QRCode)new QRCode(document.getElementById("qr"),{text:join,width:175,height:175,colorDark:"#101d32",colorLight:"#ffffff",correctLevel:QRCode.CorrectLevel.M});
+ document.getElementById("players").innerHTML=players.length?players.map(p=>'<div class="player"><span><b>'+esc(p.name)+'</b><br><small>'+esc(p.cardType)+' · '+esc(p.fragment)+'</small></span><span>'+(p.submittedCode?"CODE ENTERED":"IN LOBBY")+'</span></div>').join(""):'<div class="hint">Waiting for attendees to scan…</div>';
+ document.getElementById("formed").innerHTML=formed.length?formed.map(x=>'<div class="event-team"><b>'+esc(x.g.teamName)+'</b>'+x.s.members.map(m=>esc(m[1].name)).join(" · ")+'</div>').join(""):'<div class="hint">No teams matched yet.</div>';
+ document.getElementById("startGame").onclick=async()=>{if(!players.length){document.getElementById("hostMsg").textContent="Wait for attendees to join first.";return}await db.ref(ROOT+"/startedAt").set(Date.now());await db.ref(ROOT+"/status").set("live")};
+ document.getElementById("editProfiles").onclick=()=>profileForm(d);if(d.startedAt)startClock(d.startedAt)
+}
+function photoHtml(url){return url?'<img class="photo" src="'+esc(url)+'" alt="Profile photo">':'<div class="photo" style="display:grid;place-items:center;font-size:54px;color:#2859a8">👤</div>'}
+function cardPage(d,p){
+ const profile=d.profiles[Number(p.profileIndex)],g=d.groups[p.groupId],gs=groupStatus(d,p.groupId),live=!!d.startedAt&&Date.now()<Number(d.startedAt)+600000;
+ let clue="";
+ if(p.cardType==="name")clue='<div><div class="card-kind">NAME CARD</div><h2>'+esc(profile.name)+'</h2><p>Find the picture and responsibility cards for this person.</p></div>';
+ if(p.cardType==="picture")clue='<div><div class="card-kind">PICTURE CARD</div>'+photoHtml(profile.photoUrl)+'<p>Find the name and responsibility that belong to this person.</p></div>';
+ if(p.cardType==="role")clue='<div><div class="card-kind">ROLE / RESPONSIBILITY CARD</div><h2>'+esc(profile.role)+'</h2><p>'+esc(profile.responsibility)+'</p><p class="muted">'+esc(profile.discipline)+'</p></div>';
+ const formed=gs.formed?'<div class="team-banner"><div class="eyebrow">TEAM MATCHED</div><h2>'+esc(g.teamName)+'</h2><div class="team-roster">'+gs.members.map(x=>'<span>'+esc(x[1].name)+'</span>').join("")+'</div></div>':'';
+ document.getElementById("app").innerHTML='<div class="join-center"><div class="status">'+(live?"10-MINUTE ROUND LIVE":d.startedAt?"ROUND COMPLETE":"CARD ASSIGNED")+'</div><div class="timer" id="clock">'+(d.startedAt?fmt(Number(d.startedAt)+600000-Date.now()):"WAITING")+'</div><h2>Hello, '+esc(p.name)+'.</h2><p class="sub">Find the other two people who hold clues for the same key person.</p><section class="card"><div class="card-head"><div><div style="font-size:11px;font-weight:950;letter-spacing:.12em">ARC DISCIPLINE CONNECTION</div><div class="card-kind">YOUR CARD · '+esc(p.cardType.toUpperCase())+'</div></div><div class="card-fragment">'+esc(p.fragment)+'</div></div><div class="card-content">'+clue+'</div><div style="text-align:center;font-size:11px;color:#53627c">Code order: NAME → PICTURE → ROLE</div></section>'+formed+'<div class="code-entry"><label for="teamCode">Enter the shared 9-digit code</label><p class="hint">Combine the three card fragments in the order shown. All three people enter the same code.</p><input id="teamCode" inputmode="numeric" maxlength="9" placeholder="000000000" value="'+esc(p.submittedCode||"")+'"><button class="btn" id="submitCode" style="width:100%;margin-top:10px" '+(!live?"disabled":"")+'>SUBMIT TEAM CODE</button><div class="msg" id="playerMsg"></div><p class="hint">Correct submissions: '+gs.correct.length+' / 3</p></div></div>';
+ if(d.startedAt)startClock(d.startedAt);
+ document.getElementById("teamCode").oninput=e=>e.target.value=e.target.value.replace(/\\D/g,"").slice(0,9);
+ document.getElementById("submitCode").onclick=async()=>{
+  const code=document.getElementById("teamCode").value,msg=document.getElementById("playerMsg");
+  if(code.length!==9){msg.className="msg error";msg.textContent="Enter all 9 digits.";return}
+  if(!live){msg.className="msg error";msg.textContent="The game is not active or has ended.";return}
+  await db.ref(ROOT+"/players/"+uid+"/submittedCode").set(code);
+  msg.className=code===g.code?"msg":"msg error";msg.textContent=code===g.code?"Code accepted. Waiting for your teammates…":"Not matched yet. Compare all three fragments and try again.";
+ }
+}
+function joinPage(d){
+ const p=d.players&&d.players[uid];if(p){cardPage(d,p);return}
+ if(d.startedAt){document.getElementById("app").innerHTML='<div class="join-center"><div class="panel"><h2>Registration closed</h2><p class="sub">The host has started the 10-minute game. Please contact the facilitator.</p></div></div>';return}
+ document.getElementById("app").innerHTML='<div class="join-center"><div class="eyebrow">SCAN · JOIN · FIND YOUR TEAM</div><h2>Enter your name.</h2><p class="sub">You will receive one clue card: a person’s name, picture, or responsibility.</p><div class="join-card"><label for="attendeeName">Your name</label><input id="attendeeName" maxlength="50" placeholder="Type your name"><div class="msg" id="joinMsg"></div><button class="btn" id="joinBtn" style="width:100%">GET MY CARD</button></div><p class="hint">The host starts one shared 10-minute timer after registration.</p></div>';
+ document.getElementById("joinBtn").onclick=async()=>{
+  const name=document.getElementById("attendeeName").value.trim(),msg=document.getElementById("joinMsg");if(!name){msg.className="msg error";msg.textContent="Enter your name first.";return}
+  msg.textContent="Assigning your card…";
+  try{
+   const old=await db.ref(ROOT+"/players/"+uid).once("value");if(old.exists()){cardPage((await eventRef().once("value")).val(),old.val());return}
+   const tx=await db.ref(ROOT+"/nextCardIndex").transaction(v=>{const n=Number(v||0);if(n>=(d.deck||[]).length)return;return n+1});
+   if(!tx.committed){msg.className="msg error";msg.textContent="All cards are assigned. Ask the host to add capacity.";return}
+   const index=Number(tx.snapshot.val())-1,c=d.deck[index],g=d.groups[c.groupId],record={name:name,cardId:index,groupId:c.groupId,profileIndex:Number(g.profileId.slice(1))-1,cardType:c.type,fragment:c.fragment,submittedCode:"",joinedAt:Date.now()};
+   await db.ref(ROOT+"/players/"+uid).set(record);cardPage((await eventRef().once("value")).val(),record)
+  }catch(e){msg.className="msg error";msg.textContent="Could not assign a card: "+e.message}
+ };
+}
+function main(){
+ if(!readyConfig()){showError("Firebase setup is required. GitHub Pages alone cannot synchronize registrations from 100 phones. See README.md, then paste Firebase web settings into index.html.");return}
+ signIn().then(()=>{if(IS_HOST)document.getElementById("modePill").textContent="HOST DASHBOARD";db.ref(ROOT).on("value",s=>{
+  const d=s.val();if(IS_HOST){if(!d||!d.deck)profileForm(d);else hostPage(d)}else if(!d||!d.deck)showError("The host has not prepared this event yet. Try again shortly.");else joinPage(d)
+ },e=>showError("Database connection failed: "+e.message))}).catch(e=>showError(e.message))
+}
+main();
+</script></body></html>
