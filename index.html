@@ -35,7 +35,7 @@ footer{text-align:center;color:#8194b6;font-size:10px;padding-top:13px}
 <main id="app"><div class="panel">Loading game…</div></main>
 <footer>ARC event game · 3 people · 3 clue cards · one 9-digit team code</footer></div>
 <script>
-const FIREBASE_CONFIG={apiKey:"PASTE_FIREBASE_API_KEY",authDomain:"YOUR_PROJECT.firebaseapp.com",databaseURL:"https://YOUR_PROJECT-default-rtdb.firebaseio.com",projectId:"YOUR_PROJECT",appId:"PASTE_FIREBASE_APP_ID"};
+const FIREBASE_CONFIG={apiKey:"AIzaSyDkrO9M6qeWX4C_j9EFBVh3fZP9qPm1nsY",authDomain:"arcevent-a933f.firebaseapp.com",databaseURL:"https://arcevent-a933f-default-rtdb.firebaseio.com",projectId:"arcevent-a933f",appId:"1:809010890121:web:1b8b99340157479243cd58"};
 const params=new URLSearchParams(location.search),IS_HOST=params.get("host")==="1",EVENT_ID=(params.get("event")||"arc-event").replace(/[^a-zA-Z0-9_-]/g,"").slice(0,40),ROOT="arcEvents/"+EVENT_ID,TYPES=["name","picture","role"];
 let db=null,auth=null,uid=null,timerHandle=null,profileRows=0;
 function esc(v){return String(v||"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
